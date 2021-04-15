@@ -1,7 +1,6 @@
 # Docker file for a slim Ubuntu-based Python3 image
 
 FROM ubuntu:latest
-MAINTAINER fnndsc "dev@babymri.org"
 
 ENV DEBIAN_FRONTEND=noninteractive
 
