@@ -20,7 +20,6 @@ RUN /etc/init.d/mysql start && mysql -u root -p -e "CREATE DATABASE IF NOT EXIST
 	 USE mysql; \
 	 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'mysqlroot';"
 
-
 RUN pip install flask pymysql
 
 WORKDIR /app
