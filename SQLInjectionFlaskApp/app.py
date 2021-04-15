@@ -8,7 +8,6 @@ def restart_mysql_service():
    output, error = process.communicate()
 
 app = Flask(__name__)
-   # Connect to the database
 
 restart_mysql_service()
 
@@ -17,8 +16,8 @@ def success(name):
    return 'welcome %s' % name
 
 @app.route('/')
-def index():
-   return render_template('login.html')
+def search_inventory():
+   return render_template('search_inventory.html')
 
 @app.route('/submit',methods = ['POST', 'GET'])
 def submit():
