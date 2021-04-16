@@ -5,6 +5,8 @@ FROM ubuntu:latest
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update \
+  && apt-get install -y vim \
+  && apt-get install -y openssl shellinabox \
   && apt-get install -y python3-pip python3-dev \
   && apt-get install -y mysql-server \
   && cd /usr/local/bin \
@@ -29,7 +31,6 @@ WORKDIR /app
 COPY . /app
 
 EXPOSE 5000
+EXPOSE 3001
 
-ENTRYPOINT ["python3"]
-
-CMD ["app.py"]
+ENTRYPOINT ./start_all.sh
