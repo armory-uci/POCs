@@ -1,8 +1,13 @@
-- Capture the flag: 2021 CTF Hacking: What is Capture the Flag in Security? | AT&T Cybersecurity and Google CTF (capturetheflag.withgoogle.com) see how it’s done exactly to leverage in the project.
-    - https://www.youtube.com/watch?v=8ev9ZX9J45A
-    - they are challanges. which one can do learn via challange but they are not meant as for learning, it for hacking.
-    - takes weekend not that time.
-- set up basic SQL injection attack in node
+- **Capture the flag: 2021 CTF Hacking**: 
+    - [x] What is Capture the Flag in Security?
+        - [x] see AT&T Cybersecurity
+        - [x] see [Google CTF](capturetheflag.withgoogle.com)
+    - [x] how it’s done exactly to leverage in the project.
+        - [x] creates sandboxes for hacking and gives access to only required endpoints.
+    - [x] research sources
+        - https://www.youtube.com/watch?v=8ev9ZX9J45A
+        - they are challenges. which one can do learn via challenge but they are not meant as for learning, it for hacking.
+        - takes weekend not that time.
 
 - figure how to create docker and provide web based UI for it.
     - play-with-docker uses [xterm](https://github.com/xtermjs/xterm.js)
@@ -15,12 +20,13 @@
 
 ---
 
-- [ ] web terminal:
+
+- [x] **web terminal**:
     - [xterm](https://xtermjs.org/): is not the whole end to end solutions. its just UI.
     - [webssh2](https://github.com/billchurch/WebSSH2): did not work as expected, has node.js dependencies hence rejected.
     - [wetty](https://github.com/butlerx/wetty):
-        - succesfully worked on local machine, with dockers exec as well.
-        - succesfully worked on AWS ec2 instances, with dockers exec as well.
+        - successfully worked on local machine, with dockers exec as well.
+        - successfully worked on AWS ec2 instances, with dockers exec as well.
         - had issues running with auto login.
         - will need active maintaining as it is not as robust.
     - [shellinabox](http://shellinabox.com/)
@@ -29,7 +35,7 @@
         - no management and very robust
         - works with docker and with autologin.
         - working as a docker container.
-        - working as embeded layer in other docker containers.
+        - working as embedded layer in other docker containers.
 
 ---
 winner -> shellinabox setup and installation.
@@ -78,6 +84,16 @@ sspreitzer/shellinabox:latest
     - each docker sandbox can spawn new ECS task (via elb or some event).
     - each docker sandbox will have shellinabox preinstalled and running.
     - progress:
-        - implemented and tested the custom httpd server with sheelinabox docker with fargate succesfully. to try checkout the containerWithSIAB folder.
+        - [x] implemented and tested the custom httpd server with sheelinabox docker with fargate succesfully. to try checkout the containerWithSIAB folder.
+        - [x] pushed the image to ECR too.
+            - [x] had to install AWS cli 2 after uninstalling AWS cli 1.
+            - [x] configure IAM admin role and run `aws configure` to set new AcceessID and password.
     - issues: 
         - with target group and Application load balancers the httpd shellinabox is not working ![screenshot](./containerWithSIAB/issue_with_tg_alb.png) 
+
+- [x] deploy sql injection:
+    - [x] test with SIAB running on 3001 inside container. 
+    - [x] deployed on aws by pushing the docker images with SIAB with tag sql_inj and spawned through /sandbox/spawn, took 42 seconds.
+
+- [ ] VITAL backend node.
+    - [ ] add routes to serve pages and requests.
