@@ -1,7 +1,7 @@
 - **Capture the flag: 2021 CTF Hacking**: 
     - [x] What is Capture the Flag in Security?
         - [x] see AT&T Cybersecurity
-        - [x] see [Google CTF](capturetheflag.withgoogle.com)
+        - [x] see [Google CTF](https://capturetheflag.withgoogle.com/)
     - [x] how it’s done exactly to leverage in the project.
         - [x] creates sandboxes for hacking and gives access to only required endpoints.
     - [x] research sources
@@ -29,7 +29,7 @@
         - successfully worked on AWS ec2 instances, with dockers exec as well.
         - had issues running with auto login.
         - will need active maintaining as it is not as robust.
-    - [shellinabox](http://shellinabox.com/)
+    - [shellinabox](https://github.com/shellinabox/shellinabox)
 : **winner**
         - readily available as nix package.
         - no management and very robust
@@ -79,8 +79,8 @@ sspreitzer/shellinabox:latest
 
 
 - approach 2: using AWS fargate 
-    - using fargate have benefits of no instance management, more effienct instance use and lower cost.
-    - we can just focus on creating vulnrabile docker as sandbox.
+    - using fargate have benefits of no instance management, more efficient instance use and lower cost.
+    - we can just focus on creating vulnerable  docker as sandbox.
     - each docker sandbox can spawn new ECS task (via elb or some event).
     - each docker sandbox will have shellinabox preinstalled and running.
     - progress:
@@ -95,5 +95,43 @@ sspreitzer/shellinabox:latest
     - [x] test with SIAB running on 3001 inside container. 
     - [x] deployed on aws by pushing the docker images with SIAB with tag sql_inj and spawned through /sandbox/spawn, took 42 seconds.
 
-- [ ] VITAL backend node.
-    - [ ] add routes to serve pages and requests.
+- [x] VITAL backend node.
+    - [x] add routes to serve pages and requests.
+
+- [ ] set up basic SQL injection attack in node
+- [ ] prevent user from doing rm -rf
+    - [ ] restrict to only edit the file.
+- [ ] make the flask server not exit the container on errors like indentation error etc see vim fix error.
+
+- [x] do we need normalize port?
+    - [x] not needed if port from config. https://stackoverflow.com/questions/55988881/what-does-normalizeport-function-do-in-nodejs#:~:text=The%20normalizePort(val)%20function%20simply,number%2C%20string%2C%20or%20false.
+
+- [x] create constants and .env file and config files and error contants file.
+    - [x] https://codingsans.com/blog/node-config-best-practices 
+    - [x] .env files contains things which we don't commit to github as they might have credentials.
+    - [x] config file for ports etc.
+    - [x] created helpers.
+    - [x] created errors as well.
+
+- [x] check node express backend best practices.
+    - [x] reference express generator and error handling and validation articles.
+- [x] remove deprecated node express bodyparses etc.
+- [x] restructre to keep all backend code in one folder.
+- [x] restructure to support default express builder format.
+- [x] CORS use build in.
+- [x] set js linter
+- [x] a data validator like validator.js for data and convict for configs.
+- [ ] dicuss persistant storge for container cleanups.
+    - [ ] explore firebase
+- [x] [error handler](https://sematext.com/blog/node-js-error-handling/)
+    - [x] https://expressjs.com/en/guide/error-handling.html
+    - [x] https://jasonwatmore.com/post/2020/05/13/node-mongo-api-with-email-sign-up-verification-authentication-forgot-password#error-handler-js
+    - [x] https://codeburst.io/better-error-handling-in-express-js-b118fc29e9c7
+    - [x] https://sematext.com/blog/node-js-error-handling/
+    - [x] https://blog.heroku.com/best-practices-nodejs-errors
+
+- [ ] [revise js](https://javascript.info/)
+    - [ ] scopes let const etc.
+    - [ ] revisit js interview questions.
+
+- [ ] deploy vital
