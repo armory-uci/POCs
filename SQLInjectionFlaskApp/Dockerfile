@@ -33,4 +33,5 @@ COPY . /app
 EXPOSE 5000
 EXPOSE 3001
 
+RUN ["chmod", "+x", "./start_all.sh"]
 ENTRYPOINT ./start_all.sh
