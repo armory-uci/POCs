@@ -33,7 +33,7 @@ You can now see rows with MySQL database metadata getting appended (UNION) along
 
 The given website is running on a flask server written in Python. You can explore the server code using the terminal shown in the middle pane. 
 
-Navigate to `/server/path/app.py` to see the server code and how SQL command is constructed.
+Navigate to `app.py` to see the server code and how SQL command is constructed.
 
 In line number `42` of `app.py`we see the SQL command is constructed using a simple string concatenation:
 
