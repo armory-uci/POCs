@@ -20,6 +20,8 @@ What would the SQL command look like if instead of **hammer** we put the followi
 
 `hammer' UNION (SELECT TABLE_NAME, TABLE_SCHEMA FROM information_schema.tables);--` 
 
+*Note the space in the end after `-- `*
+
 The SQL command would now look like this:
 
 `SELECT ?? FROM ?? WHERE ?? LIKE '%hammer' UNION (SELECT TABLE_NAME, TABLE_SCHEMA FROM information_schema.tables);--%'`
