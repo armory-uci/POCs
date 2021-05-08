@@ -1,44 +1,53 @@
 <html>
-   <style>
-      table {
-        font-family: arial, sans-serif;
-        border-collapse: collapse;
-        width: 50%;
-      }
-      
-      td, th {
-        border: 1px solid #dddddd;
-        text-align: left;
-        padding: 8px;
-      }
-      
-      tr:nth-child(even) {
-        background-color: #dddddd;
-      }
-      </style>
-   <body>
-      <form action = "http://localhost:5000/submit" method = "post">
-         <p>Enter Name:</p>
-         <p><input type = "text" name = "item" /></p>
-         <p><input type = "submit" value = "submit" /></p>
-      </form>
-      <div>
-         <table>
-            <tr>
-               <th>Item Name</th>
-               <th>Price</th>
-            </tr>
-         {% for i in user %}
-            <tr>
-               <td>
-                  {{ i.item_name }}
-               </td>
-               <td>
-                  {{ i.price }}
-               </td>
-            </tr>
+<style>
+   table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 50%;
+   }
+
+   td,
+   th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+   }
+
+   tr:nth-child(even) {
+      background-color: #dddddd;
+   }
+</style>
+
+<body>
+   <form action="/submit" method="post">
+      <p>Enter item name:</p>
+      <p><input type="text" name="item" /></p>
+      <p><input type="submit" value="submit" /></p>
+
+   </form>
+   <div>
+      <table>
+         {% if 'item_name' in search_result[0] %}
+         <tr>
+            <th>Item Name</th>
+            <th>Price</th>
+         </tr>
+         {% for i in search_result %}
+         <tr>
+            <td>
+               {{ i.item_name }}
+            </td>
+            <td>
+               {{ i.price }}
+            </td>
+         </tr>
          {% endfor %}
-         </table>
-      </div>
-   </body>
+         {% elif 'error' in search_result[0] %}
+         <h1>Invalid input</h1>
+         <h2>Error: {{ search_result[0]['error'] }}</h2>
+         {% endif %}
+      </table>
+   </div>
+</body>
+
 </html>
