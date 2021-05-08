@@ -7,6 +7,13 @@ var indexRouter = require('./routes/index');
 var dbRouter = require('./routes/db');
 
 var app = express();
+var nunjucks = require('nunjucks');
+
+nunjucks.configure('views', {
+  autoescape: true,
+  express: app
+});
+app.set('view engine', 'html');
 
 app.use(logger('dev'));
 app.use(express.json());
