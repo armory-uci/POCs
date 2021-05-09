@@ -25,7 +25,7 @@ router.get("/products", (req, res) => {
 router.post("/products", (req, res) => {
     // NOTE: need sanitization here.
     products.push(req.body.name);
-    res.send({"success":true})
+    res.send({status: `post saved with id ${products.length}` });
 })
 
 router.get ("/js", (req, res )=> {

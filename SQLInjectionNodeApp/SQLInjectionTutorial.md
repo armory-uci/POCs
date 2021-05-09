@@ -30,7 +30,6 @@ The SQL command would now look like this:
 ```sql
 SELECT ?? FROM ?? WHERE ?? LIKE '%hammer' UNION (SELECT TABLE_NAME, TABLE_SCHEMA FROM information_schema.tables);--%'
 ```
-
 <br>
 
 > **Note:** **INFORMATION_SCHEMA** provides access to database metadata, information about the MySQL server such as the name of a database or **table**, the data type of a column, or access privileges
@@ -39,33 +38,33 @@ You can now see rows with MySQL database metadata getting appended (UNION) along
 
 # Mitigate
 
-The given website is running on a flask server written in Python. You can explore the server code using the terminal shown in the middle pane. 
+The given website is running on a Node.js server written in javascript. You can explore the server code using the terminal shown in the middle pane. 
 
-Navigate to `app.py` to see the server code and how SQL command is constructed.
+Navigate to `/app/routes/db.js` to see the server code and how SQL command is constructed.
 
-In line number `42` of `app.py`we see the SQL command is constructed using a simple string concatenation:
+In line number `17` of `db.js` we see the SQL command is constructed using a simple string concatenation:
 
-```python
-sql_command = "select * from items where item_name like '%%"+item+"%'"
+```js
+const sql_command = `select * from items where item_name like '%${req.body.item}%';`;
 ```
 
 Plain string concatenation is always a bad idea when it comes to constructing SQL commands.
 
-Its always a good idea to follow best practices to solve such problems. Python ([PEP 249](http://www.python.org/dev/peps/pep-0249/)) has suggestions on how queries should be executed for various db operations requirements. 
+Its always a good idea to follow best practices to solve such problems.
 
-## String formatting in python
+## String formatting in Node.js via mysql library.
 The problem with above string concatenated command was that the item name was never assumed to be a string as a whole. There were ways to bypass the escape sequence and become part of the main syntax through some clever positioning of characters such as `%` and `--`. 
 
-Python has a fix for solving such ambiguities using **string formatting**. This allows our code to treat a string formatted variable to be a whole string no matter what escape sequences it may contain. This is done using **%s**. 
+[mysql](https://github.com/mysqljs/mysql#escaping-query-values) has a fix for solving such ambiguities using **Escaping Query Values**. This allows our code to treat a string formatted variable to be a whole string no matter what escape sequences it may contain. This is done using **mysql.escape**. 
 
 The command can be executed in the following manner to treat the input texts as strings as a whole and to prevent it from getting combined with the SQL syntax.
 
-```python
-cursor.execute("SELECT * FROM items WHERE item_name LIKE %s ''", ("%"+item+"%",))
+```js
+const sql_command = `select * from items where item_name like ${mysql.escape('%' + req.body.item + '%')};`;
 ```
 
-Remove the `sql_command` at line `42` and replace the execute command in line `45` with the above. 
+comment the `sql_command` at line `17` and uncomment the execute command in line `19`. 
 
 Trying the malicious SQL inject input no longer exposes critical database information. 
 
-<strong>Congratulations!!! you just learnt how to secure your python server from SQLInjection</strong>
+<strong>Congratulations!!! you just learnt how to secure your Node.js server from SQLInjection</strong>
