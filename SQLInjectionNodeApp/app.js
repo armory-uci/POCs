@@ -1,13 +1,13 @@
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var dbRouter = require('./routes/db');
+const indexRouter = require('./routes/index');
+const dbRouter = require('./routes/db');
 
-var app = express();
-var nunjucks = require('nunjucks');
+const app = express();
+const nunjucks = require('nunjucks');
 
 nunjucks.configure('views', {
   autoescape: true,
