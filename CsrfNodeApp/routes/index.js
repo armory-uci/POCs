@@ -25,7 +25,7 @@ const getCSRFTokenKey = (userId) => `csrf_token_${userId.toLowerCase()}`
 const transferWithCSRFToken = (from, to, amount, userId, req_csrf_token) => {
   const saved_csrf_token = cache.get(getCSRFTokenKey(userId));
   if (!saved_csrf_token || !req_csrf_token ||  saved_csrf_token != req_csrf_token) {
-    console.log(`probable CSRF attack: ${from.name} ${to.name} ${amount} ${userId} ${req_csrf_token}`);
+    console.debug(`probable CSRF attack: ${from.name} ${to.name} ${amount} ${userId} ${req_csrf_token}`);
     throw new Error(`invalid csrf token`);
   }
 
@@ -76,7 +76,7 @@ router.post('/transfer', async (req, res, next) => {
     // const transferRes = await transferWithCSRFToken(from, to, parseInt(amount), userId, req_csrf_token);
 
     req.session.user = from;
-    console.log('transferRes', transferRes);
+    // console.log('transferRes', transferRes);
     // return res.json(transferRes);
     return res.redirect('/');
   } catch (error) {
@@ -88,8 +88,12 @@ router.post('/transfer', async (req, res, next) => {
 });
 
 
-router.get ("/js", (req, res )=> {
-  res.sendFile(__dirname + "/src.js")
+router.get ("/login", (req, res )=> {
+  res.sendFile(__dirname + "/login.js");
+});
+
+router.get("/location", (req, res) => {
+  res.sendFile(__dirname + "/location.js");
 });
 
 router.post('/login', (req, res) => {
@@ -103,11 +107,11 @@ router.post('/login', (req, res) => {
       throw new Error(`user ${userId} not found`);
 
     req.session.user = user[0];
-    console.log('players', players);
+    // console.log('players', players);
   
     let csrf_token = crypto.randomBytes(16).toString('base64');
     cache.set(getCSRFTokenKey(userId), csrf_token);
-    
+    // console.log('session', req.session);
     return res.json({ success: true });
   } catch (error) {
     let csrf_token;
@@ -133,6 +137,7 @@ router.get('/reset', async (req, res, next) => {
 /* GET home page. */
 router.get('/', function(req, res, next) {
   let csrf_token;
+  // console.log('req.session', req.session);
   if (req.session.user)
     csrf_token = cache.get(getCSRFTokenKey(req.session.user.name));
   res.render('index', { user: req.session.user, blogs, players, csrf_token });

@@ -53,7 +53,7 @@
                 name="to_player_id"
                 value="hacker"/>
             <input type="submit"
-                value="dowload torrent for CyberFunk 2077!"/>
+                value="download torrent for CyberFunk 2077!"/>
           </form>
       </div>
    
@@ -85,7 +85,7 @@
             {% else %}
             <div>
                <button id = 'btnAdd'>login via SSO</button>
-               <script src = '/js'></script>
+               <script src = '/login'></script>
             </div>
             {% endif %}
          </table>
@@ -104,10 +104,12 @@
       <div class="vl"></div>
 
       <div style="width: 20%">
-         <a href="reset/">
+         <a href="/reset">
             <button>RESET EXERCISE</button>
          </a>
          <h3>Debug Information:</h3>
+         <p id = 'location'></p>
+         <script src = '/location'></script>
          {% if error %}
          <h2>{{ error }}</h2>
          {% endif %}
