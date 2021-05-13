@@ -1,0 +1,19 @@
+{
+  "name": "csrfnodeapp",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon ./bin/www -e=js,mjs,json,html"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "cors": "^2.8.5",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "express-session": "^1.17.1",
+    "morgan": "~1.9.1",
+    "node-cache": "^5.1.2",
+    "nodemon": "^2.0.7",
+    "nunjucks": "^3.2.3"
+  }
+}
