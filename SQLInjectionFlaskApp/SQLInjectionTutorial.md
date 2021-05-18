@@ -51,7 +51,7 @@ The given website is running on a flask server written in Python. You can explor
 
 Navigate to `app.py` to see the server code and how SQL command is constructed.
 
-In line number `42` of `app.py`we see the SQL command is constructed using a simple string concatenation:
+In line number `37` of `app.py` we see the SQL command is constructed using a simple string concatenation:
 
 ```python
 sql_command = "select * from items where item_name like '%%"+item+"%'"

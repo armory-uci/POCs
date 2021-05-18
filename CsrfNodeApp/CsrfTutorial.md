@@ -87,7 +87,7 @@ To Activate this flow do the following
 - navigate to /app/routes/index.js to line 78 using
 
 ```
-vim /app/routes/index.js +75
+vim /app/routes/index.js +51
 ```
 
 there you'll see the following code block
@@ -114,7 +114,7 @@ const transferRes = await transferWithCSRFToken(
 with the above changes now **RESET** and retry the **EXPLOIT** steps, you'll see that CSRF attacks are successfully mitigated.
 
 CSRF was thwarted as follows.
-on login, the below code block at /app/routes/index.js line no 112, generated and stores a unique CSRF token in a persistent cache.
+on login, the below code block at /app/routes/index.js line no 127, generated and stores a unique CSRF token in a persistent cache.
 
 ```js
 let csrf_token = crypto.randomBytes(16).toString('base64');

@@ -2,7 +2,7 @@ const express = require('express');
 const NodeCache = require('node-cache');
 const  crypto = require('crypto');
 const  cache = new NodeCache();
-
+const invalidCSRFErrorStr = "invalid csrf token";
 const router = express.Router();
 
 let players = [
@@ -26,7 +26,7 @@ const transferWithCSRFToken = (from, to, amount, userId, req_csrf_token) => {
   const saved_csrf_token = cache.get(getCSRFTokenKey(userId));
   if (!saved_csrf_token || !req_csrf_token ||  saved_csrf_token != req_csrf_token) {
     console.debug(`probable CSRF attack: ${from.name} ${to.name} ${amount} ${userId} ${req_csrf_token}`);
-    throw new Error(`invalid csrf token`);
+    throw new Error(invalidCSRFErrorStr);
   }
 
   from.balance -= amount;
@@ -47,6 +47,10 @@ const transferWithoutCSRFToken = async (from, to, amount) => {
   return { success: true };
 };
 
+const transferAmount = async (from, to, amount, userId, req_csrf_token) => {
+  return await transferWithoutCSRFToken(from, to, parseInt(amount));
+  // return await transferWithCSRFToken(from, to, parseInt(amount), userId, req_csrf_token);
+}
 
 router.post('/transfer', async (req, res, next) => {
   try {
@@ -72,8 +76,7 @@ router.post('/transfer', async (req, res, next) => {
     if (from.name == to.name)
       throw new Error(`same account tranfer by ${from.name}`);
 
-    const transferRes = await transferWithoutCSRFToken(from, to, parseInt(amount));
-    // const transferRes = await transferWithCSRFToken(from, to, parseInt(amount), userId, req_csrf_token);
+    const transferRes = await transferAmount(from, to, parseInt(amount), userId, req_csrf_token);
 
     req.session.user = from;
     // console.log('transferRes', transferRes);
@@ -87,8 +90,20 @@ router.post('/transfer', async (req, res, next) => {
   }
 });
 
+router.get('/status', async (req, res) => {
+  const status = { solved: false };
+  const userId = req.session.user && req.session.user.name;
+  const guess_csrf_token = crypto.randomBytes(16).toString('base64');
+  try {
+    const transferRes = await transferAmount('hacker', 'hacker', 0, userId, guess_csrf_token);
+    return res.json(status);
+  } catch (error) {
+    status.solved = error.message == invalidCSRFErrorStr;
+    return res.json(status);
+  }
+});
 
-router.get ("/login", (req, res )=> {
+router.get ("/login", (req, res ) => {
   res.sendFile(__dirname + "/login.js");
 });
 

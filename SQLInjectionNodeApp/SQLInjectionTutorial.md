@@ -50,7 +50,7 @@ The given website is running on a Node.js server written in javascript. You can 
 
 Navigate to `/app/routes/db.js` to see the server code and how SQL command is constructed.
 
-In line number `17` of `db.js` we see the SQL command is constructed using a simple string concatenation:
+In line number `15` of `db.js` we see the SQL command is constructed using a simple string concatenation:
 
 ```js
 const sql_command = `select * from items where item_name like '%${req.body.item}%';`;
