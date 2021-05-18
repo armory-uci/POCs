@@ -1,12 +1,9 @@
 ---
-title: XSS Persistent
-serverId: xssStored
+server_id: xssStored
 language: node
 ---
 
-# Let's try out Stored Cross-Site Scripting.
-
-## EXPLORE
+<!-- explore-start -->
 
 The rightmost browser window has a Public Blog Post Site.
 To add a new post click the "Add" button and type in the new post content.
@@ -14,7 +11,8 @@ After the post is saved in the backend server a new entry in public Blog Post wo
 
 You can explore and add more posts.
 
-## Exploit
+<!-- explore-end -->
+<!-- exploit-start -->
 
 ### Step 1:
 
@@ -88,7 +86,8 @@ cat /app/hacker_server/cookies.txt
 if this Public Blog Post would have had some sensitive user information or some monetary shopping transactions.
 then the hacker would be able to [hijack the user session](https://www.netsparker.com/blog/web-security/session-hijacking/#:~:text=Session%20hijacking%20is%20an%20attack,ends%20when%20you%20log%20out.) and do all sorts of harm.
 
-## Mitigate
+<!-- exploit-end -->
+<!-- mitigate-start -->
 
 The Node.js Server for our Public Blog Post has No [Content-Security-Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP). To Enable the CSP do the following
 
@@ -105,3 +104,5 @@ res.setHeader('Content-Security-Policy', "script-src 'self'");
 ```
 
 the above line restricts the browser to only execute javascript served from the site's own origin and blocks any inline javascript. Hence mitigating the XSS vulnerability.
+
+<!-- mitigate-end -->

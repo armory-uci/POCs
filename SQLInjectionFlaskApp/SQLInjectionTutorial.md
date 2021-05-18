@@ -1,6 +1,5 @@
 ---
-title: SQL Injection
-serverId: sqlInjection
+server_id: sqlInjection
 language: python
 ---
 

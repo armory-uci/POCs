@@ -1,12 +1,11 @@
 ---
-title: SQL Injection
-serverId: sqlInjectionNode
+server_id: sqlInjectionNode
 language: node
 ---
 
 # Lets try out SQL Injection!
 
-## Explore
+<!-- explore-start -->
 
 In the right most window, you can see a website that queries for items in an inventory. Let us try to get some information about the nature of query and get an idea about the SQL commands used internally.
 
@@ -18,7 +17,8 @@ We see the query output shows a list of items that have **hammer** in its name. 
 SELECT ?? FROM ?? WHERE ?? LIKE '%hammer%'
 ```
 
-## Exploit
+<!-- explore-end -->
+<!-- exploit-start -->
 
 In the above command, we really don't have control over the entire SQL syntax. But the **'hammer'** within the wildcard symbols **%%** is where we can skillfully insert our commands to exploit SQL.
 
@@ -42,7 +42,9 @@ SELECT ?? FROM ?? WHERE ?? LIKE '%hammer' UNION (SELECT TABLE_NAME, TABLE_SCHEMA
 
 You can now see rows with MySQL database metadata getting appended (UNION) along with the query result. This exposes critical database credentials and tables that can further be exploited to access more values and even remove tables.
 
-# Mitigate
+<!-- exploit-end -->
+
+<!-- mitigate-start -->
 
 The given website is running on a Node.js server written in javascript. You can explore the server code using the terminal shown in the middle pane.
 
@@ -77,3 +79,5 @@ comment the `sql_command` at line `17` and uncomment the execute command in line
 Trying the malicious SQL inject input no longer exposes critical database information.
 
 <strong>Congratulations!!! you just learnt how to secure your Node.js server from SQLInjection</strong>
+
+<!-- mitigate-end -->
