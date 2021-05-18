@@ -33,6 +33,7 @@ const setProblemContent = async (metadata, content) => {
         },
         { merge: true },
       );
+    console.log(`${metadata.server_id} created.`);
   } else {
     if (ref.docs.length > 1) {
       console.log(
@@ -54,9 +55,8 @@ const setProblemContent = async (metadata, content) => {
         },
         { merge: true },
       );
+    console.log(`${metadata.server_id} updated.`);
   }
-
-  console.log(`${metadata.server_id} updated.`);
 };
 
 module.exports = {
