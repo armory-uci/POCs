@@ -4,7 +4,6 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
 const indexRouter = require('./routes/index');
-const dbRouter = require('./routes/db');
 
 const app = express();
 const nunjucks = require('nunjucks');
@@ -22,6 +21,5 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/submit', dbRouter);
 
 module.exports = app;

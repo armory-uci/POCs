@@ -66,9 +66,9 @@ The issue is that the HTTP request from the legit website and the request from t
 One solution is to use the [Synchronizer Token Pattern](https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html#General_Recommendation:_Synchronizer_Token_Pattern). This solution is to ensure that each request requires, in addition to our session cookie, a randomly generated token as an HTTP parameter. When a request is submitted, the server must look up the expected value for the parameter and compare it against the actual value in the request. If the values do not match, the request should fail.
 
 To Activate this flow do the following
-* navigate to /app/routes/index.js to line 78 using
+* navigate to /app/routes/index.js to line 51 using
 ```
-vim /app/routes/index.js +75
+vim /app/routes/index.js +51
 ```
 
 there you'll see the following code block
@@ -87,7 +87,7 @@ const transferRes = await transferWithCSRFToken(from, to, parseInt(amount), user
 with the above changes now **RESET** and retry the **EXPLOIT** steps, you'll see that CSRF attacks are successfully mitigated.
 
 CSRF was thwarted as follows.
-on login, the below code block at /app/routes/index.js line no 112, generated and stores a unique CSRF token in a persistent cache.
+on login, the below code block at /app/routes/index.js line no 127, generated and stores a unique CSRF token in a persistent cache.
 
 ```js
 let csrf_token = crypto.randomBytes(16).toString('base64');

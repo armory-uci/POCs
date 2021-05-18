@@ -42,7 +42,7 @@ The given website is running on a Node.js server written in javascript. You can 
 
 Navigate to `/app/routes/db.js` to see the server code and how SQL command is constructed.
 
-In line number `17` of `db.js` we see the SQL command is constructed using a simple string concatenation:
+In line number `15` of `db.js` we see the SQL command is constructed using a simple string concatenation:
 
 ```js
 const sql_command = `select * from items where item_name like '%${req.body.item}%';`;
@@ -63,7 +63,7 @@ The command can be executed in the following manner to treat the input texts as 
 const sql_command = `select * from items where item_name like ${mysql.escape('%' + req.body.item + '%')};`;
 ```
 
-comment the `sql_command` at line `17` and uncomment the execute command in line `19`. 
+comment the `sql_command` at line `15` and uncomment the execute command in line `17`. 
 
 Trying the malicious SQL inject input no longer exposes critical database information. 
 
