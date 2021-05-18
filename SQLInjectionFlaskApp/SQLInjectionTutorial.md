@@ -43,7 +43,7 @@ The given website is running on a flask server written in Python. You can explor
 
 Navigate to `app.py` to see the server code and how SQL command is constructed.
 
-In line number `42` of `app.py`we see the SQL command is constructed using a simple string concatenation:
+In line number `37` of `app.py` we see the SQL command is constructed using a simple string concatenation:
 
 ```python
 sql_command = "select * from items where item_name like '%%"+item+"%'"
@@ -64,7 +64,7 @@ The command can be executed in the following manner to treat the input texts as 
 cursor.execute("SELECT * FROM items WHERE item_name LIKE %s ''", ("%"+item+"%",))
 ```
 
-Remove the `sql_command` at line `42` and replace the execute command in line `45` with the above. 
+Remove the `sql_command` at line `37` and replace the execute command in line `38` with the above. 
 
 Trying the malicious SQL inject input no longer exposes critical database information. 
 

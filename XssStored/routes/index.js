@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const fs = require("fs");
-
+const fetch = require('node-fetch');
 
 const products = ["public blog post 1"];
 
@@ -30,6 +30,16 @@ router.post("/products", (req, res) => {
 
 router.get ("/js", (req, res )=> {
   res.sendFile(__dirname + "/src.js")
+});
+
+router.get("/status", async (req, res) => {
+    const status = { solved: false };
+    const render_res = await fetch('http://localhost:5000/');
+    if (render_res.headers.get('Content-Security-Policy')) {
+        const CSPHeader = render_res.headers.get('Content-Security-Policy');
+        status.solved = CSPHeader == "script-src 'self'";
+    }
+    return res.json(status);
 });
 
 router.use('/hacker_server', require('../hacker_server'));

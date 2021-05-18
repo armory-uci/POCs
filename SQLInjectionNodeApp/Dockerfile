@@ -12,6 +12,7 @@ RUN apt-get update \
   && apt-get install -y curl gnupg \
   && curl -sL https://deb.nodesource.com/setup_12.x  | bash - \
   && apt-get install -y nodejs \
+  && npm install pm2 -g \
   && npm install
 
 RUN /etc/init.d/mysql start && mysql -u root -p -e "CREATE DATABASE IF NOT EXISTS inventory; \

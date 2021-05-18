@@ -6,6 +6,7 @@ COPY . /app
 RUN apt-get update \
   && apt-get install -y vim \
   && apt-get install -y openssl shellinabox \
+  && npm install pm2 -g \
   && npm install
 
 EXPOSE 5000
