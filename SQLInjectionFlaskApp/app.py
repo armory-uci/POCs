@@ -1,23 +1,24 @@
+from flask_failsafe import failsafe
 from flask import Flask, redirect, url_for, request, render_template
 from pymysql import connect, cursors
 import subprocess
 
+def create_app():
+    app = Flask(__name__)
+    return app
+
+app = create_app()
 
 def restart_mysql_service():
     command = 'service mysql restart'
     process = subprocess.Popen(command.split(), stdout=subprocess.PIPE)
     output, error = process.communicate()
 
-
-app = Flask(__name__)
-
 restart_mysql_service()
-
 
 @app.route('/success/<name>')
 def success(name):
     return 'welcome %s' % name
-
 
 @app.route('/')
 def search_inventory():

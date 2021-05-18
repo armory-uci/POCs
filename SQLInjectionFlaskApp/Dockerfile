@@ -9,6 +9,8 @@ RUN apt-get update \
   && apt-get install -y openssl shellinabox \
   && apt-get install -y python3-pip python3-dev \
   && apt-get install -y mysql-server \
+  && apt-get install -y ack-grep \
+  && apt-get install -y entr \
   && cd /usr/local/bin \
   && ln -s /usr/bin/python3 python \
   && pip3 --no-cache-dir install --upgrade pip \
@@ -24,7 +26,7 @@ RUN /etc/init.d/mysql start && mysql -u root -p -e "CREATE DATABASE IF NOT EXIST
 	 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'mysqlroot';"
 
 
-RUN pip install flask pymysql
+RUN pip install flask pymysql Flask-Failsafe
 
 WORKDIR /app
 
