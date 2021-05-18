@@ -63,9 +63,3 @@ Now, update the `/problem_contents`
 1. Create an `.env` file inside `content-generator` folder. Add a key `GOOGLE_APPLICATION_CREDENTIALS`, and value as the path to the JSON file that you can use to get admin access. For the file, look in Project settings > Service accounts > Generate new private key. FYI, you'll need to do this only once.
 1. Add the path of markdown file you just wrote, relative the root of the repo, [here](content-generator/index.js#L23).
 1. Run `node index.js` inside `content-generator` folder. You will have to run `npm install` to get the dependencies of the project once as well.
-
-## Notes
-
-1. The content-generator is not intelligent at all. It just blindly updates all the files.
-1. There is bare minimum error handling. So make sure you follow the instructions correctly. If something is too obvious or annoying, go ahead and raise a PR.
-1. The goal of this project is to simplify pushing the markdown content to firebase and it does just that for now. No extra validations, no extra bells and whistles.
