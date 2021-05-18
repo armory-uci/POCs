@@ -1,13 +1,9 @@
-from flask_failsafe import failsafe
 from flask import Flask, redirect, url_for, request, render_template
 from pymysql import connect, cursors
 import subprocess
 
-def create_app():
-    app = Flask(__name__)
-    return app
 
-app = create_app()
+app = Flask(__name__)
 
 def restart_mysql_service():
     command = 'service mysql restart'
