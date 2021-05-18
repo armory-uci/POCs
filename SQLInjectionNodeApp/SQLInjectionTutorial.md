@@ -25,7 +25,7 @@ In the above command, we really don't have control over the entire SQL syntax. B
 What would the SQL command look like if instead of **hammer** we put the following
 
 ```sql
-hammer' UNION (SELECT TABLE_NAME, TABLE_SCHEMA FROM information_schema.tables);--
+hammer' UNION (SELECT TABLE_NAME, TABLE_SCHEMA FROM information_schema.tables);-- 
 ```
 
 _Note the space in the end after `-- `_
