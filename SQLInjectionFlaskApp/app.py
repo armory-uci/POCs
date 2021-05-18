@@ -3,21 +3,18 @@ from pymysql import connect, cursors
 import subprocess
 
 
+app = Flask(__name__)
+
 def restart_mysql_service():
     command = 'service mysql restart'
     process = subprocess.Popen(command.split(), stdout=subprocess.PIPE)
     output, error = process.communicate()
 
-
-app = Flask(__name__)
-
 restart_mysql_service()
-
 
 @app.route('/success/<name>')
 def success(name):
     return 'welcome %s' % name
-
 
 @app.route('/')
 def search_inventory():
