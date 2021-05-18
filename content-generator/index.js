@@ -57,14 +57,6 @@ const readMarkdownFiles = () => {
   return problemContents;
 };
 
-/**
- * firebase_problem_id = find problem by server_id and language
- * if not exists
- *    firebase_problem_id = create /problems with ids/language/server_id, support.push(language), title
- * content_id = find problem_contents with server_id and language
- * update/create content and add server_id, firebase_problem_id
- */
-
 const markdownFilesContent = readMarkdownFiles();
 
 const server_ids = Object.keys(markdownFilesContent);
