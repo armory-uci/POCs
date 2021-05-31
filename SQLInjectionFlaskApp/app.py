@@ -1,9 +1,12 @@
 from flask import Flask, redirect, url_for, request, render_template
 from pymysql import connect, cursors
+from flask_cors import CORS
 import subprocess
 
 
 app = Flask(__name__)
+CORS(app)
+
 
 def restart_mysql_service():
     command = 'service mysql restart'
